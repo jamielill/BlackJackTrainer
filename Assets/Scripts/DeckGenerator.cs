@@ -1,23 +1,45 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckGenerator : MonoBehaviour
 {
-    [SerializeField] private int numberOfDecks = 6;
+    [SerializeField] private static int numberOfDecks = 6;
     private List<string> upcomingCards = new List<string>();
-    private string[] cards = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-    private string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+    private static string[] cards = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
+    private static string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
 
     public event Action<int> OnCardAmountChanged;
-    [SerializeField] private TMPro.TextMeshProUGUI playerCard0;
-    [SerializeField] private TMPro.TextMeshProUGUI playerCard1;
-    [SerializeField] private TMPro.TextMeshProUGUI dealerCard0;
-    [SerializeField] private TMPro.TextMeshProUGUI dealerCard1;
+    [SerializeField] private GameObject playerCard0;
+    [SerializeField] private GameObject playerCard1;
+    [SerializeField] private GameObject dealerCard0;
+    [SerializeField] private GameObject dealerCard1;
+
+    private TMPro.TextMeshProUGUI playerCard0Text;
+    private TMPro.TextMeshProUGUI playerCard1Text;
+    private TMPro.TextMeshProUGUI dealerCard0Text;
+    private TMPro.TextMeshProUGUI dealerCard1Text;
+
+    private UnityEngine.UI.Image playerCard0Image;
+    private UnityEngine.UI.Image playerCard1Image;
+    private UnityEngine.UI.Image dealerCard0Image;
+    private UnityEngine.UI.Image dealerCard1Image;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerCard0Text = playerCard0.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        playerCard1Text = playerCard1.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        dealerCard0Text = dealerCard0.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        dealerCard1Text = dealerCard1.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+
+        playerCard0Image = playerCard0.GetComponent<UnityEngine.UI.Image>();
+        playerCard1Image = playerCard1.GetComponent<UnityEngine.UI.Image>();
+        dealerCard0Image = dealerCard0.GetComponent<UnityEngine.UI.Image>();
+        dealerCard1Image = dealerCard1.GetComponent<UnityEngine.UI.Image>();
+
         for (int i = 0; i < numberOfDecks; i++)
         {
             foreach (var suit in suits)
@@ -68,15 +90,21 @@ public class DeckGenerator : MonoBehaviour
     public void BeginRound()
     {
         if (upcomingCards.Count > 0)
-        { 
+        {
             //players 1st card
-            playerCard0.text = DrawCard();
+            playerCard0Text.text = DrawCard();
+            playerCard0Image.color = Color.white;
+            playerCard0Text.enabled = true;
             //dealer 1st card (hidden)
-            dealerCard0.text = DrawCard();
+            dealerCard0Text.text = DrawCard();
             //players 2nd card
-            playerCard1.text = DrawCard(); 
+            playerCard1Text.text = DrawCard();
+            playerCard1Image.color = Color.white;
+            playerCard1Text.enabled = true;
             //dealer 2nd card
-            dealerCard1.text = DrawCard();
+            dealerCard1Text.text = DrawCard();
+            dealerCard1Image.color = Color.white;
+            dealerCard1Text.enabled = true;
         }
         
     }
