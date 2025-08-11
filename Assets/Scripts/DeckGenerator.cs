@@ -1,18 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DeckGenerator : MonoBehaviour
 {
-    [SerializeField] private static int numberOfDecks = 6;
+    [SerializeField] private int numberOfDecks = 6;
     [SerializeField] private float dealSpeed = 0.5f;
+    [SerializeField] private Sprite cardBackSprite;
+    [SerializeField] private Sprite cardFrontSprite;
 
-    private List<string> upcomingCards = new List<string>();
-    private static string[] cards = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
-    private static string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+    private List<Card> upcomingCards = new List<Card>();
 
     public event Action<int> OnCardAmountChanged;
     [SerializeField] private GameObject playerCard0;
@@ -50,11 +48,11 @@ public class DeckGenerator : MonoBehaviour
 
         for (int i = 0; i < numberOfDecks; i++)
         {
-            foreach (var suit in suits)
+            foreach (Suit suit in System.Enum.GetValues(typeof(Suit)))
             {
-                foreach (var card in cards)
+                foreach (Rank rank in System.Enum.GetValues(typeof(Rank)))
                 {
-                    upcomingCards.Add($"{card} of\n {suit}");
+                    upcomingCards.Add(new Card(suit, rank));
                 }
             }
         }
@@ -69,7 +67,7 @@ public class DeckGenerator : MonoBehaviour
         OnCardAmountChanged?.Invoke(upcomingCards.Count);
     }
 
-    void ShuffleList(List<string> list)
+    void ShuffleList(List<Card> list)
     {
         System.Random rng = new System.Random();
         int cardsLeftToShuffle = list.Count;
@@ -77,7 +75,7 @@ public class DeckGenerator : MonoBehaviour
         {
             cardsLeftToShuffle--;
             int randomIndex = rng.Next(cardsLeftToShuffle + 1);
-            string valueAtRandomIndex = list[randomIndex];
+            Card valueAtRandomIndex = list[randomIndex];
             list[randomIndex] = list[cardsLeftToShuffle];
             list[cardsLeftToShuffle] = valueAtRandomIndex;
         }
@@ -87,10 +85,10 @@ public class DeckGenerator : MonoBehaviour
     {
         if (upcomingCards.Count > 0)
         {
-            string drawnCard = upcomingCards[0];
+            Card drawnCard = upcomingCards[0];
             upcomingCards.RemoveAt(0);
             OnCardAmountChanged?.Invoke(upcomingCards.Count);
-            return drawnCard;
+            return drawnCard.ToString();
         }
         return null;
     }
@@ -98,6 +96,7 @@ public class DeckGenerator : MonoBehaviour
     public void StartDealing()
     {
         StartCoroutine(Deal());
+        
     }
 
     IEnumerator Deal()
@@ -106,7 +105,7 @@ public class DeckGenerator : MonoBehaviour
         {
             //players 1st card
             playerCard0Text.text = DrawCard();
-            playerCard0Image.color = Color.white;
+            playerCard0Image.sprite = cardFrontSprite;
             playerCard0Image.enabled = true;
             playerCard0Text.enabled = true;
             yield return new WaitForSeconds(dealSpeed);
@@ -118,14 +117,14 @@ public class DeckGenerator : MonoBehaviour
 
             //players 2nd card
             playerCard1Text.text = DrawCard();
-            playerCard1Image.color = Color.white;
+            playerCard1Image.sprite = cardFrontSprite;
             playerCard1Image.enabled = true;
             playerCard1Text.enabled = true;
             yield return new WaitForSeconds(dealSpeed);
 
             //dealer 2nd card
             dealerCard1Text.text = DrawCard();
-            dealerCard1Image.color = Color.white;
+            dealerCard1Image.sprite = cardFrontSprite;
             dealerCard1Image.enabled = true;
             dealerCard1Text.enabled = true;
         }
@@ -136,7 +135,7 @@ public class DeckGenerator : MonoBehaviour
         if (upcomingCards.Count > 0)
         {
             playerCard2Text.text = DrawCard();
-            playerCard2Image.color = Color.white;
+            playerCard2Image.sprite = cardFrontSprite;
             playerCard2Image.enabled = true;
             playerCard2Text.enabled = true;
         }
@@ -150,7 +149,7 @@ public class DeckGenerator : MonoBehaviour
 
     private void RevealDealerCard()
     {
-        dealerCard0Image.color = Color.white;
+        dealerCard0Image.sprite = cardFrontSprite;
         dealerCard0Text.enabled = true;
         dealerCard0Image.enabled = true;
     }
