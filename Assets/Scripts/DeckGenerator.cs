@@ -8,8 +8,12 @@ public class DeckGenerator : MonoBehaviour
     private List<string> upcomingCards = new List<string>();
     private string[] cards = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
     private string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
-    
+
     public event Action<int> OnCardAmountChanged;
+    [SerializeField] private TMPro.TextMeshProUGUI playerCard0;
+    [SerializeField] private TMPro.TextMeshProUGUI playerCard1;
+    [SerializeField] private TMPro.TextMeshProUGUI dealerCard0;
+    [SerializeField] private TMPro.TextMeshProUGUI dealerCard1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +24,7 @@ public class DeckGenerator : MonoBehaviour
             {
                 foreach (var card in cards)
                 {
-                    upcomingCards.Add($"{card} of {suit}");
+                    upcomingCards.Add($"{card} of\n {suit}");
                 }
             }
         }
@@ -49,13 +53,31 @@ public class DeckGenerator : MonoBehaviour
         }
     }
 
-    public void DrawCard()
+    private string DrawCard()
     {
         if (upcomingCards.Count > 0)
         {
             string drawnCard = upcomingCards[0];
             upcomingCards.RemoveAt(0);
             OnCardAmountChanged?.Invoke(upcomingCards.Count);
+            return drawnCard;
         }
+        return null;
+    }
+
+    public void BeginRound()
+    {
+        if (upcomingCards.Count > 0)
+        { 
+            //players 1st card
+            playerCard0.text = DrawCard();
+            //dealer 1st card (hidden)
+            dealerCard0.text = DrawCard();
+            //players 2nd card
+            playerCard1.text = DrawCard(); 
+            //dealer 2nd card
+            dealerCard1.text = DrawCard();
+        }
+        
     }
 }
