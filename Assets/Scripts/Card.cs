@@ -1,44 +1,29 @@
-public enum Suit 
-{
-    Hearts,
-    Diamonds,
-    Clubs,
-    Spades
-}
+using System;
+using UnityEngine;
 
-public enum Rank
-{
-    Ace = 1,
-    Two = 2,
-    Three = 3,
-    Four = 4,
-    Five = 5,
-    Six = 6,
-    Seven = 7,
-    Eight = 8,
-    Nine = 9,
-    Ten = 10,
-    Jack = 11,
-    Queen = 12,
-    King = 13
-}
-
-public struct Card
+public class Card : MonoBehaviour
 {
     private Suit suit;
     private Rank rank;
+    private TMPro.TextMeshProUGUI Text;
+    [SerializeField] private Sprite cardBackSprite;
+    [SerializeField] private Sprite cardFrontSprite;
 
-    public Card(Suit suit, Rank rank)
+    private bool isFaceUp = false;
+
+    public void Setup(Suit suit, Rank rank)
     {
         this.suit = suit;
         this.rank = rank;
+        Text = GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        Text.text = ToString();
     }
 
     public override string ToString()
     {
         string rankString;
 
-        switch(rank)
+        switch (rank)
         {
             case Rank.Ace:
             case Rank.Jack:
@@ -51,5 +36,12 @@ public struct Card
                 break;
         }
         return $"{rankString} of\n {suit}";
+    }
+
+    public void FlipCard()
+    {
+        isFaceUp = !isFaceUp;
+        GetComponent<UnityEngine.UI.Image>().sprite = isFaceUp ? cardFrontSprite : cardBackSprite;
+        Text.enabled = isFaceUp;
     }
 }

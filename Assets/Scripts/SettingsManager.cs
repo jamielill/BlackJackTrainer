@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class SettingsManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    // deal speed in seconds
+    public float dealSpeed = 0.5f;
+    // number of decks in shoe
+    public int numberOfDecks = 1;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

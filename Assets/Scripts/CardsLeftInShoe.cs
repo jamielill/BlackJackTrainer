@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class CardAmount : MonoBehaviour
+public class CardsLeftInShoe : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI cardAmount;
     [SerializeField] private DeckGenerator deckGenerator;
