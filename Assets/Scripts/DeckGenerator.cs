@@ -8,7 +8,6 @@ public class DeckGenerator : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private SettingsManager settingsManager;
-    
 
     public event Action<int> OnCardAmountChanged;
 
@@ -40,6 +39,8 @@ public class DeckGenerator : MonoBehaviour
             Debug.Log($"{gameManager.cardsInShoe[i]} at index {i}");
         }
         OnCardAmountChanged?.Invoke(gameManager.cardsInShoe.Count);
+
+        gameManager.StartDealing();
     }
 
     void ShuffleList(List<GameObject> list)
