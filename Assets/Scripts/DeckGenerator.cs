@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +17,9 @@ public class DeckGenerator : MonoBehaviour
     {
         for (int i = 0; i < settingsManager.numberOfDecks; i++)
         {
-            foreach (Suit suit in System.Enum.GetValues(typeof(Suit)))
+            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
             {
-                foreach (Rank rank in System.Enum.GetValues(typeof(Rank)))
+                foreach (Rank rank in Enum.GetValues(typeof(Rank)))
                 {
                     GameObject generatedCard = Instantiate(cardPrefab, canvas.transform);
                     RectTransform cardRect = generatedCard.GetComponent<RectTransform>();

@@ -1,10 +1,9 @@
-using System;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    private Suit suit;
-    private Rank rank;
+    public Suit suit { get; private set; }
+    public Rank rank { get; private set; }
     private TMPro.TextMeshProUGUI Text;
     [SerializeField] private Sprite cardBackSprite;
     [SerializeField] private Sprite cardFrontSprite;
@@ -36,6 +35,16 @@ public class Card : MonoBehaviour
                 break;
         }
         return $"{rankString} of\n {suit}";
+    }
+
+    public int Value
+    {
+        get
+        {
+            if (rank == Rank.Jack || rank == Rank.Queen || rank == Rank.King)
+                return 10;
+            return (int)rank;
+        }
     }
 
     public void FlipCard()

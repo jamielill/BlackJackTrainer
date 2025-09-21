@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class BasicStrategy : MonoBehaviour
 {
     [SerializeField] private GameObject dealerCard1;
