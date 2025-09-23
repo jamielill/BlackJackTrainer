@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             for(int i = 0; i < 2; i++)
             {
+
                 playerCards.Add(DrawCard());
                 playerTotal += playerCards[playerCards.Count - 1].GetComponent<Card>().Value;
                 Debug.Log("player total: " + playerTotal);
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
                 dealerCards.Add(DrawCard());
                 dealerTotal += dealerCards[playerCards.Count - 1].GetComponent<Card>().Value;
                 Debug.Log("dealer total: " + dealerTotal);
-                if (i == 1)
+                if (i == 0)
                 {
                     dealerCards[i].GetComponent<Card>().FlipCard();
                 }
@@ -115,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     private void RevealDealerCard()
     {
-        dealerCards[0].GetComponent<Card>().FlipCard();
+        dealerCards[1].GetComponent<Card>().FlipCard();
     }
 
     private bool CheckBust()

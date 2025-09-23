@@ -90,7 +90,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardBackSprite: {fileID: -5777897504942914823, guid: e0da0d1935faa4e468610517eb7bfc73, type: 3}
-  cardFrontSprite: {fileID: -2230455480699979051, guid: 1c4c2fa069ba65b4396659a1fac45f5b, type: 3}
+  heartSprites:
+  - {fileID: 7582643865833442955, guid: 376f572c45bc3074e8bb5e019f33825f, type: 3}
+  - {fileID: 6937817954938267909, guid: f3ce86b0b731d7f49a48830f8077e053, type: 3}
+  - {fileID: -6470460504253458178, guid: 886c439385be9dd49913b6ebf002809d, type: 3}
+  - {fileID: -4178046375966092550, guid: d9bddad1d63f61d4bbddb33d9133165f, type: 3}
+  - {fileID: 4130640169021434097, guid: f47bd4e6b5679904fb61a0e0558729e3, type: 3}
+  - {fileID: 3465286685962602723, guid: 2ecc5d42ac472844c89fa0db74475d73, type: 3}
+  - {fileID: 7028616704906629411, guid: 63b028ab0a020e144b6188c3e3bf3ff8, type: 3}
+  - {fileID: 8288426215254106694, guid: 9a2f1432e0dc6154ea62a9a985196dbb, type: 3}
+  - {fileID: 4113829005332862926, guid: 85ac44677d75aef438ce343ff0a267d8, type: 3}
+  - {fileID: -5099292496197868168, guid: d0015e9c6e376bf4b9a8b132d1147a0a, type: 3}
+  - {fileID: -7735982824379041461, guid: 9cf182101204f874b91af0642b212226, type: 3}
+  - {fileID: 7519753400087680208, guid: 72fabd131a94a604fb96d6a7a162aa44, type: 3}
+  - {fileID: -4821530343430527414, guid: 44c7ef9a60c50e24982561e640cfd4f9, type: 3}
+  diamondSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  clubSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spadeSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6674665418366707178
 GameObject:
   m_ObjectHideFlags: 0

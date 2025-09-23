@@ -1,21 +1,49 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
     public Suit suit { get; private set; }
     public Rank rank { get; private set; }
     private TMPro.TextMeshProUGUI Text;
+
+    [Header("Art References")]
     [SerializeField] private Sprite cardBackSprite;
-    [SerializeField] private Sprite cardFrontSprite;
+    private Sprite cardFrontSprite;
+    [SerializeField] private Sprite[] heartSprites;   // 13 sprites in order: Ace → King
+    [SerializeField] private Sprite[] diamondSprites;
+    [SerializeField] private Sprite[] clubSprites;
+    [SerializeField] private Sprite[] spadeSprites;
+    private Image image;
 
     private bool isFaceUp = false;
+
+    void Awake()
+    {
+        image = GetComponent<Image>(); 
+    }
 
     public void Setup(Suit suit, Rank rank)
     {
         this.suit = suit;
         this.rank = rank;
+        UpdateArt();
         Text = GetComponentInChildren<TMPro.TextMeshProUGUI>();
         Text.text = ToString();
+    }
+
+    void UpdateArt()
+    {
+        int index = (int)rank - 1;
+
+        switch (suit)
+        {
+            case Suit.Hearts: image.sprite = heartSprites[index]; break;
+            case Suit.Diamonds: image.sprite = diamondSprites[index]; break;
+            case Suit.Clubs: image.sprite = clubSprites[index]; break;
+            case Suit.Spades: image.sprite = spadeSprites[index]; break;
+        }
+        cardFrontSprite = image.sprite;
     }
 
     public override string ToString()
@@ -50,7 +78,7 @@ public class Card : MonoBehaviour
     public void FlipCard()
     {
         isFaceUp = !isFaceUp;
-        GetComponent<UnityEngine.UI.Image>().sprite = isFaceUp ? cardFrontSprite : cardBackSprite;
+        image.sprite = isFaceUp ? cardFrontSprite : cardBackSprite;
         Text.enabled = isFaceUp;
     }
 }
