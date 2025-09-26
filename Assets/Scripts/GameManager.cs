@@ -106,7 +106,6 @@ public class GameManager : MonoBehaviour
 
     public void Stand()
     {
-        RevealDealerCard();
         //make dealer hit until 17 or higher
         hitButton.interactable = false;
         standButton.interactable = false;

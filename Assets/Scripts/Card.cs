@@ -5,7 +5,6 @@ public class Card : MonoBehaviour
 {
     public Suit suit { get; private set; }
     public Rank rank { get; private set; }
-    private TMPro.TextMeshProUGUI Text;
 
     [Header("Art References")]
     [SerializeField] private Sprite cardBackSprite;
@@ -28,22 +27,18 @@ public class Card : MonoBehaviour
         this.suit = suit;
         this.rank = rank;
         UpdateArt();
-        Text = GetComponentInChildren<TMPro.TextMeshProUGUI>();
-        Text.text = ToString();
     }
 
     void UpdateArt()
     {
         int index = (int)rank - 1;
-
         switch (suit)
         {
-            case Suit.Hearts: image.sprite = heartSprites[index]; break;
-            case Suit.Diamonds: image.sprite = diamondSprites[index]; break;
-            case Suit.Clubs: image.sprite = clubSprites[index]; break;
-            case Suit.Spades: image.sprite = spadeSprites[index]; break;
+            case Suit.Hearts: cardFrontSprite = heartSprites[index]; break;
+            case Suit.Diamonds: cardFrontSprite = diamondSprites[index]; break;
+            case Suit.Clubs: cardFrontSprite = clubSprites[index]; break;
+            case Suit.Spades: cardFrontSprite = spadeSprites[index]; break;
         }
-        cardFrontSprite = image.sprite;
     }
 
     public override string ToString()
@@ -79,6 +74,5 @@ public class Card : MonoBehaviour
     {
         isFaceUp = !isFaceUp;
         image.sprite = isFaceUp ? cardFrontSprite : cardBackSprite;
-        Text.enabled = isFaceUp;
     }
 }
