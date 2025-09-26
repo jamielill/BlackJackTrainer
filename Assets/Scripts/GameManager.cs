@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
                 RectTransform cardRect = playerCards[i].GetComponent<RectTransform>();
                 cardRect.anchorMin = new Vector2(0.5f, 0);
                 cardRect.anchorMax = new Vector2(0.5f, 0);
-                cardRect.anchoredPosition = new Vector2(-65+130*i, 100);
+                cardRect.anchoredPosition = new Vector2(-125+250*i, 650);
                 yield return new WaitForSeconds(settingsManager.dealSpeed);
 
                 dealerCards.Add(DrawCard());
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
                 cardRect = dealerCards[i].GetComponent<RectTransform>();
                 cardRect.anchorMin = new Vector2(0.5f, 1);
                 cardRect.anchorMax = new Vector2(0.5f, 1);
-                cardRect.anchoredPosition = new Vector2(-65+130*i, -100);
+                cardRect.anchoredPosition = new Vector2(-125+250*i, -650);
                 yield return new WaitForSeconds(settingsManager.dealSpeed);
             }
             enableButtons();
